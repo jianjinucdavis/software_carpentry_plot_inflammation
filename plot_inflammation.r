@@ -25,6 +25,6 @@ data.in.melted <- melt(data.in)
     theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
 	ggtitle(paste("File: ", options[1]))
 	
-# save png based on input file name
-savename <- paste0(options[1], ".png")
+# save jpg based on input file name
+savename <- paste0(options[1], ".jpg")
 ggsave(out.plot, file=savename, width = 12, height = 8)
