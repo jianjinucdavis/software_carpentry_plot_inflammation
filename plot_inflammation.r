@@ -26,5 +26,5 @@ data.in.melted <- melt(data.in)
 	ggtitle(paste("File: ", options[1]))
 	
 # save pdf based on input file name
-savename <- paste0(options[1],".pdf")
+savename <- paste0(options[1], ".pdf")
 ggsave(out.plot, file=savename, width = 12, height = 8)
