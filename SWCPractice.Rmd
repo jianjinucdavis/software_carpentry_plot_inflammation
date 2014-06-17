@@ -1,0 +1,58 @@
+---
+title: "SWCPractice"
+author: "JJ"
+date: "Tuesday, June 17, 2014"
+output: html_document
+---
+
+* Move into your working directory (the one you have been working with for git and github)
+* Take a look at the file, and pick three countries you are interested in.
+```{r echo =FALSE}
+getwd()
+
+# Import data
+gapminder <- read.delim("gapminder.txt")
+
+# Select three countries randomly
+CountrySelected <- sample(unique(gapminder$country), 3)
+```
+
+* select all the data for that country (hint, use the subset() function)
+```{r echo = FALSE}
+names(gapminder)
+gapminderCountrySelected <- subset(gapminder, country %in% CountrySelected)
+```
+
+* use ggplot make a three scatter plots (one for each country) that has year on the x-axis and GDP on the y axis. 
+```{r echo = FALSE}
+library(ggplot2)
+gapminderCountrySelected$country
+
+myplot <- ggplot(data = gapminderCountrySelected, 
+                 aes(x = year, y = gdpPercap, color = country))
+TheScatterPlot <- myplot + geom_point() + facet_grid(country ~ .)
+```
+
+* Describe any trends you see for each country using markdown text.
+
+In general, GDP increased with years. But each country has different trends of increasing. In Dominican Republic, GDP increased slowly until 2000 when GDP started increasing rapidly. In Ecuador, GDP increased gradually until around 1980 when it reached the highest then started floating by 1500. In Montenegro, after reaching the highest in late 1980's, GDP dropped greatly until 2000 when it recovered slowly.
+
+
+
+* Commit your changes using git.
+
+
+
+
+
+
+
+You can also embed plots, for example:
+
+```{r, echo=FALSE}
+plot(cars)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot. 
+
+`r mean(c(2,3,4))`
