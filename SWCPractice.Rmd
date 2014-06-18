@@ -41,17 +41,35 @@ In general, GDP increased with years. But each country has different trends of i
 
 * Commit your changes using git.
 
+* Calculate the mean, min, and max life expectancies for each continent (hint: you use aggregate() if you like). 
+
+```{r echo = FALSE}
+names(gapminder)
+
+desLifeExp <- function(x) {
+  mean.data = mean(x, na.rm = TRUE) 
+  min.data = min(x, na.rm = TRUE)
+  max.data = max(x, na.rm = TRUE)
+  des <- cbind(mean.data, min.data, max.data)
+  return(des)
+}
+
+desLifeExp(gapminder$lifeExp)
 
 
-
-
-
-
-You can also embed plots, for example:
-
-```{r, echo=FALSE}
-plot(cars)
+DesLifeExpbyContinent <- aggregate(lifeExp ~ continent, 
+                                   data = gapminder, desLifeExp)
+DesLifeExpbyContinent[,2:4] <- as.data.frame(DesLifeExpbyContinent[,2])
+names(DesLifeExpbyContinent)[2:4] <- c("mean", "min", "max")
+DesLifeExpbyContinent
 ```
+
+* Describe what you see in the results using a markdown text.
+Africa has the lowest life expectancy. Europeand and Oceania have the highest life expectancy, but the min life expectancy in Oceania is much higher. Asia and Americas are about average.
+
+* Commit your changes using git and push them to github.
+
+
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot. 
 
