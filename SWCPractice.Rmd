@@ -8,8 +8,6 @@ output: html_document
 * Move into your working directory (the one you have been working with for git and github)
 * Take a look at the file, and pick three countries you are interested in.
 ```{r echo =FALSE}
-getwd()
-
 # Import data
 gapminder <- read.delim("gapminder.txt")
 
@@ -19,18 +17,16 @@ CountrySelected <- sample(unique(gapminder$country), 3)
 
 * select all the data for that country (hint, use the subset() function)
 ```{r echo = FALSE}
-names(gapminder)
 gapminderCountrySelected <- subset(gapminder, country %in% CountrySelected)
 ```
 
 * use ggplot make a three scatter plots (one for each country) that has year on the x-axis and GDP on the y axis. 
 ```{r echo = FALSE}
 library(ggplot2)
-gapminderCountrySelected$country
-
 myplot <- ggplot(data = gapminderCountrySelected, 
                  aes(x = year, y = gdpPercap, color = country))
 TheScatterPlot <- myplot + geom_point() + facet_grid(country ~ .)
+TheScatterPlot
 ```
 
 * Describe any trends you see for each country using markdown text.
@@ -44,8 +40,6 @@ In general, GDP increased with years. But each country has different trends of i
 * Calculate the mean, min, and max life expectancies for each continent (hint: you use aggregate() if you like). 
 
 ```{r echo = FALSE}
-names(gapminder)
-
 desLifeExp <- function(x) {
   mean.data = mean(x, na.rm = TRUE) 
   min.data = min(x, na.rm = TRUE)
@@ -53,9 +47,6 @@ desLifeExp <- function(x) {
   des <- cbind(mean.data, min.data, max.data)
   return(des)
 }
-
-desLifeExp(gapminder$lifeExp)
-
 
 DesLifeExpbyContinent <- aggregate(lifeExp ~ continent, 
                                    data = gapminder, desLifeExp)
@@ -74,14 +65,11 @@ Africa has the lowest life expectancy. Europeand and Oceania have the highest li
 
 One with the default bin widths and one with narrower bin widths (you can check in the pdf from yesterday's lesson for the syntax you might need to do this). Explain the differences and any interesting trends in markdown text.
 ```{r echo=FALSE, message=FALSE, fig.height=8, fig.width=8}
-names(gapminder)
 myhist <- ggplot(data = gapminder, aes(x = lifeExp))
 myhistorigin <- myhist + geom_histogram()
+myhistorigin
 myhistnarrow <- myhist + geom_histogram(binwidth = 0.5)
 myhistnarrow
 ```
 
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot. 
-
-`r mean(c(2,3,4))`
+Using the default width shows more of the general pattern of life Expentacies. Using the narrower width allows us to see more detailed information.
