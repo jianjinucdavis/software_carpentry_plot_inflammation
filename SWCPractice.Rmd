@@ -70,6 +70,17 @@ Africa has the lowest life expectancy. Europeand and Oceania have the highest li
 * Commit your changes using git and push them to github.
 
 
+* Make a 2 histograms of global life expectancy using ggplot. 
+
+One with the default bin widths and one with narrower bin widths (you can check in the pdf from yesterday's lesson for the syntax you might need to do this). Explain the differences and any interesting trends in markdown text.
+```{r echo=FALSE, message=FALSE, fig.height=8, fig.width=8}
+names(gapminder)
+myhist <- ggplot(data = gapminder, aes(x = lifeExp))
+myhistorigin <- myhist + geom_histogram()
+myhistnarrow <- myhist + geom_histogram(binwidth = 0.5)
+myhistnarrow
+```
+
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot. 
 
